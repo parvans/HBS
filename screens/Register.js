@@ -24,7 +24,7 @@ class Register extends React.Component {
         >
           <Block safe flex middle>
             <Block style={styles.registerContainer}>
-              <Block flex={0.25} middle style={styles.socialConnect}>
+              {/* <Block flex={0.25} middle style={styles.socialConnect}>
                 <Text color="#8898AA" size={12}>
                   Sign up with
                 </Text>
@@ -54,11 +54,14 @@ class Register extends React.Component {
                     </Block>
                   </Button>
                 </Block>
-              </Block>
+              </Block> */}
               <Block flex>
                 <Block flex={0.17} middle>
-                  <Text color="#8898AA" size={12}>
-                    Or sign up the classic way
+                  <Images source={Images.LogoOnboarding} />
+                </Block>
+                <Block flex={0.17} middle>
+                  <Text color="#8898AA" size={30}>
+                    Register
                   </Text>
                 </Block>
                 <Block flex center>
@@ -112,7 +115,7 @@ class Register extends React.Component {
                           />
                         }
                       />
-                      <Block row style={styles.passwordCheck}>
+                      {/* <Block row style={styles.passwordCheck}>
                         <Text size={12} color={argonTheme.COLORS.MUTED}>
                           password strength:
                         </Text>
@@ -120,9 +123,9 @@ class Register extends React.Component {
                           {" "}
                           strong
                         </Text>
-                      </Block>
+                      </Block> */}
                     </Block>
-                    <Block row width={width * 0.75}>
+                    {/* <Block row width={width * 0.75}>
                       <Checkbox
                         checkboxStyle={{
                           borderWidth: 3
@@ -140,7 +143,7 @@ class Register extends React.Component {
                       >
                         Privacy Policy
                       </Button>
-                    </Block>
+                    </Block> */}
                     <Block middle>
                       <Button color="primary" style={styles.createButton}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
