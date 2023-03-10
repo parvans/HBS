@@ -62,8 +62,13 @@ class DrawerItem extends React.Component {
           size={14}
           color={focused ? "white" : "rgba(0,0,0,0.5)"}
         />);
-      case "Log out":
-        return <Icon />;
+      case "Logout":
+        return <Icon
+          name="remove-circle"
+          family="ArgonExtra"
+          size={14}
+          color={focused ? "white" : "rgba(0,0,0,0.5)"}
+         />;
       default:
         return null;
     }

@@ -10,6 +10,7 @@ import CustomDrawerContent from "./Menu";
 import Elements from "../screens/Elements";
 // screens
 import Home from "../screens/Home";
+import HBSHome from "../screens/hbs/HBSHome";
 import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
@@ -18,6 +19,7 @@ import Register from "../screens/Register";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
+import GetStarted from "../screens/hbs/GetStarted";
 
 const { width } = Dimensions.get("screen");
 
@@ -158,7 +160,7 @@ function HomeStack(props) {
         headerShown: "screen",
       }}
     >
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Home"
         component={Home}
         options={{
@@ -168,6 +170,22 @@ function HomeStack(props) {
               search
               options
               navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" },
+        }}
+      /> */}
+      <Stack.Screen
+        name="Home"
+        component={HBSHome}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title="Home"
+              search
+              // options
+              // navigation={navigation}
               scene={scene}
             />
           ),
@@ -203,9 +221,16 @@ export default function OnboardingStack(props) {
         headerShown: false,
       }}
     >
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Onboarding"
         component={Onboarding}
+        option={{
+          headerTransparent: true,
+        }}
+      /> */}
+      <Stack.Screen
+        name="GetStarted"
+        component={GetStarted}
         option={{
           headerTransparent: true,
         }}

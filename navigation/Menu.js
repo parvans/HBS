@@ -4,7 +4,7 @@ import { Image, ScrollView, StyleSheet } from "react-native";
 import { DrawerItem as DrawerCustomItem } from "../components";
 import Images from "../constants/Images";
 import React from "react";
-
+import hbsLogo from "../assets/imgs/hbs-black.png";
 function CustomDrawerContent({
   drawerPosition,
   navigation,
@@ -20,7 +20,10 @@ function CustomDrawerContent({
       forceInset={{ top: "always", horizontal: "never" }}
     >
       <Block flex={0.06} style={styles.header}>
-        <Image styles={styles.logo} source={Images.Logo} />
+        <Image styles={styles.logo} source={hbsLogo} />
+        <Text h5 bold color="black" style={{ marginLeft: 3, marginTop: 10 }}>
+          HBS
+        </Text>
       </Block>
       <Block flex style={{ paddingLeft: 8, paddingRight: 14 }}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
@@ -64,7 +67,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
     paddingBottom: theme.SIZES.BASE,
     paddingTop: theme.SIZES.BASE * 3,
-    justifyContent: "center",
+    // justifyContent: "center",
+    display: "flex",
+    flexDirection: "row",
+
+  },
+  logo: {
+    height: 20,
+    width: 20,
   },
 });
 
