@@ -64,10 +64,10 @@ class DrawerItem extends React.Component {
         />);
       case "Logout":
         return <Icon
-          name="remove-circle"
+          name="padlock-unlocked"
           family="ArgonExtra"
           size={14}
-          color={focused ? "white" : "rgba(0,0,0,0.5)"}
+          color={focused ? "white" : "red"}
          />;
       default:
         return null;
