@@ -20,6 +20,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import GetStarted from "../screens/hbs/GetStarted";
+import Login from "../screens/hbs/auth/Login.js";
 
 const { width } = Dimensions.get("screen");
 
@@ -269,7 +270,7 @@ function AppStack(props) {
           fontWeight: "normal",
         },
       }}
-      initialRouteName="Home"
+      initialRouteName="Account"
     >
       <Drawer.Screen
         name="Home"
@@ -287,7 +288,7 @@ function AppStack(props) {
       />
       <Drawer.Screen
         name="Account"
-        component={Register}
+        component={Login}
         options={{
           headerShown: false,
         }}
