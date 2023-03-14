@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Argon FREE React Native",
-    "slug": "argon-free-react-native",
+    "name": "HBS",
+    "slug": "HBS",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -9,9 +9,9 @@
     ],
     "version": "1.7.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/imgs/hbs-white.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/imgs/newsplash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -24,6 +24,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Argon React Native, based on Argon Design System. Coded by Creative Tim"
+    "description": "Hall Booking System"
   }
 }

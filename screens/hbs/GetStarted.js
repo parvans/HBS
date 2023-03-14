@@ -56,7 +56,7 @@ export default function GetStarted(props) {
             <Button
               style={styles.button}
               color={argonTheme.COLORS.SECONDARY}
-              onPress={() => navigation.navigate("App")}
+              onPress={() => navigation.navigate("Login")}
               textStyle={{ color: argonTheme.COLORS.BLACK }}
             >
               Get Started

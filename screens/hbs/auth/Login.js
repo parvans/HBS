@@ -7,14 +7,15 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { Block, Checkbox, Text, theme } from "galio-framework";
-
+import { useNavigation } from '@react-navigation/native';
 import { Button, Icon, Input } from "../../../components";
 import { argonTheme } from "../../../constants";
 import Images from "../../../constants/Images";
-
 const { width, height } = Dimensions.get("screen");
 
-export default function Login() {
+export default function Login(props) {
+  // const navigation = useNavigation();
+  const { navigation } = props;
   return (
     <Block flex middle>
       <StatusBar hidden />
@@ -83,10 +84,10 @@ export default function Login() {
                     />
                   </Block>
                   <Block middle>
-                      <Button color="primary" style={styles.createButton}>
-                        <Text bold size={14} color={argonTheme.COLORS.WHITE}>
+                      <Button color="primary" style={styles.createButton} onpress={() => console.log("Login Button Pressed")}>
+                        {/* <Text bold size={14} color={argonTheme.COLORS.WHITE}> */}
                           Login
-                        </Text>
+                        {/* </Text> */}
                       </Button>
                     </Block>
                 </KeyboardAvoidingView>
