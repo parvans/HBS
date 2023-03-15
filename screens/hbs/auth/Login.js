@@ -6,16 +6,16 @@ import {
   StatusBar,
   KeyboardAvoidingView,
 } from "react-native";
-import { Block, Checkbox, Text, theme } from "galio-framework";
-import { useNavigation } from '@react-navigation/native';
+import { Block, Text } from "galio-framework";
 import { Button, Icon, Input } from "../../../components";
 import { argonTheme } from "../../../constants";
 import Images from "../../../constants/Images";
 const { width, height } = Dimensions.get("screen");
 
 export default function Login(props) {
-  // const navigation = useNavigation();
   const { navigation } = props;
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   return (
     <Block flex middle>
       <StatusBar hidden />
@@ -69,7 +69,7 @@ export default function Login(props) {
                   </Block>
                   <Block width={width * 0.8}>
                     <Input
-                      type="password"
+                      password
                       borderless
                       placeholder="Password"
                       iconContent={
@@ -84,7 +84,7 @@ export default function Login(props) {
                     />
                   </Block>
                   <Block middle>
-                      <Button color="primary" style={styles.createButton} onpress={() => console.log("Login Button Pressed")}>
+                      <Button color="primary" style={styles.createButton} onPress={() => navigation.navigate('App')}>
                         {/* <Text bold size={14} color={argonTheme.COLORS.WHITE}> */}
                           Login
                         {/* </Text> */}

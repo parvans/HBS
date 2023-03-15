@@ -21,6 +21,7 @@ class ArInput extends React.Component {
 
     return (
       <Input
+        type="password"
         placeholder="write something here"
         placeholderTextColor={argonTheme.COLORS.MUTED}
         style={inputStyles}

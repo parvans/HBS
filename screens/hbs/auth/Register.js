@@ -120,7 +120,8 @@ export default function Register({navigation}) {
                   </Block>
                   <Block width={width * 0.8}>
                     <Input
-                      type="password"
+                      //type="password"
+                      password
                       borderless
                       placeholder="Password"
                       iconContent={
