@@ -38,7 +38,7 @@ export default function Register({navigation}) {
       };
   return (
     <Block flex middle>
-      <StatusBar hidden />
+      <StatusBar barStyle="light-content" />
       <ImageBackground
         source={Images.RegisterBackground}
         style={{ width, height, zIndex: 1 }}

@@ -1,7 +1,7 @@
 import { Block, Text, theme } from "galio-framework";
-import { Image, ScrollView, StyleSheet } from "react-native";
+import { Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 
-import { DrawerItem as DrawerCustomItem } from "../components";
+import { Button, DrawerItem as DrawerCustomItem } from "../components";
 import Images from "../constants/Images";
 import React from "react";
 import hbsLogo from "../assets/imgs/hbs-black.png";
@@ -15,18 +15,20 @@ function CustomDrawerContent({
 }) {
   const screens = ["Home", 
   // "Profile", 
-  "Add User", "Elements", "Articles","Logout"];
+  "Add User", "Elements", "Articles"];
   return (
     <Block
       style={styles.container}
       forceInset={{ top: "always", horizontal: "never" }}
     >
-      <Block flex={0.06} style={styles.header}>
+      {/* <Block flex={0.06} style={styles.header} > */}
+        <TouchableOpacity flex={0.06}  style={styles.header} onPress={() => navigation.navigate("Home")}>
         <Image styles={styles.logo} source={hbsLogo} />
-        <Text h5 bold color="black" style={{ marginLeft: 3, marginTop: 10 }}>
+        <Text h5 bold color="black"  style={{ marginLeft: 3, marginTop: 10 }} >
           HBS
         </Text>
-      </Block>
+        </TouchableOpacity>
+      {/* </Block> */}
       <Block flex style={{ paddingLeft: 8, paddingRight: 14 }}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
           {screens.map((item, index) => {
