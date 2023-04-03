@@ -15,11 +15,12 @@ import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import React from "react";
-import Register from "../screens/Register";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import GetStarted from "../screens/hbs/GetStarted";
+import Login from "../screens/hbs/auth/Login.js";
+import Register from "../screens/hbs/auth/Register.js";
 
 const { width } = Dimensions.get("screen");
 
@@ -65,6 +66,7 @@ function ElementsStack(props) {
     </Stack.Navigator>
   );
 }
+
 
 function ArticlesStack(props) {
   return (
@@ -152,6 +154,8 @@ function ProfileStack(props) {
   );
 }
 
+
+
 function HomeStack(props) {
   return (
     <Stack.Navigator
@@ -231,9 +235,21 @@ export default function OnboardingStack(props) {
       <Stack.Screen
         name="GetStarted"
         component={GetStarted}
+
         option={{
           headerTransparent: true,
         }}
+      />
+        <Stack.Screen
+          name="Home"
+          component={HomeStack}
+          option={{
+            headerTransparent: true,
+          }}
+        />
+      <Stack.Screen
+        name="Login"
+        component={Login}
       />
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
@@ -286,7 +302,7 @@ function AppStack(props) {
         }}
       />
       <Drawer.Screen
-        name="Account"
+        name="Add User"
         component={Register}
         options={{
           headerShown: false,
