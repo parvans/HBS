@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -6,24 +6,84 @@ import {
   StatusBar,
   KeyboardAvoidingView,
 } from "react-native";
+import { AlertNotificationRoot,ALERT_TYPE,Toast,Dialog } from "react-native-alert-notification";
 import { Block, Text } from "galio-framework";
 import { Button, Icon, Input } from "../../../components";
 import { argonTheme } from "../../../constants";
 import Images from "../../../constants/Images";
+import { api } from "../../../api/apiService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const { width, height } = Dimensions.get("screen");
 
 export default function Login(props) {
   const { navigation } = props;
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] =useState("");
+  const [password, setPassword] =useState("");
+const userToken= AsyncStorage.getItem('user-token')
+  const handleLogin = async() => {
+    if(!email && !password){
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error',
+        textBody: 'Email and Password is required',
+        button: 'close',
+      });
+  }else if(!email){
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error',
+        textBody: 'Email is required',
+        button: 'close',
+      });
+  }else if(!password){
+    Dialog.show({
+      type: ALERT_TYPE.DANGER,
+      title: 'Error',
+      textBody: 'Password is required',
+      button: 'close',
+    });
+  }
+  if(email && password){
+    await api.post('auth/login', {
+      email: email,
+      password: password
+    }).then((response) => {
+      console.log(response.data)
+      if(response.data.token){
+        // Toast.show({
+        //   type: ALERT_TYPE.SUCCESS,
+        //   title: 'Success',
+        //   textBody: 'Login Success',
+        //   button: 'close',
+        // });
+        AsyncStorage.setItem('user-token',response.data.token)
+        if(userToken){
+          navigation.navigate('App')
+        }
+      }else{
+        Dialog.show({
+          type: ALERT_TYPE.DANGER,
+          title: 'Error',
+          textBody: response.data.message,
+          button: 'close',
+        });
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+    }
+  }
+
+
   return (
-    <Block flex middle>
+    <Block flex middle >
+<AlertNotificationRoot>
       <StatusBar hidden />
       <ImageBackground
         source={Images.RegisterBackground}
         style={{ width, height, zIndex: 1 }}
       >
-        <Block safe flex middle>
+        <Block safe flex middle >
           <Block style={styles.registerContainer}>
             <Block flex style={{marginTop:20}}>
               <Block flex={0.17} middle>
@@ -34,7 +94,7 @@ export default function Login(props) {
               <Block flex center>
                 <KeyboardAvoidingView
                   style={{ flex: 1 }}
-                  behavior="padding"
+                  behavior="position"
                   enabled
                 >
                   {/* <Block width={width * 0.8} style={{ marginBottom: 15 }}>
@@ -56,6 +116,8 @@ export default function Login(props) {
                     <Input
                       borderless
                       placeholder="Email"
+                      value={email}
+                      onChangeText={(text) => setEmail(text)}
                       iconContent={
                         <Icon
                           size={16}
@@ -66,12 +128,15 @@ export default function Login(props) {
                         />
                       }
                     />
+                   
                   </Block>
                   <Block width={width * 0.8}>
                     <Input
                       password
                       borderless
                       placeholder="Password"
+                      value={password}
+                      onChangeText={(text) => setPassword(text)}
                       iconContent={
                         <Icon
                           size={16}
@@ -84,7 +149,7 @@ export default function Login(props) {
                     />
                   </Block>
                   <Block middle>
-                      <Button color="primary" style={styles.createButton} onPress={() => navigation.navigate('App')}>
+                      <Button color="primary" style={styles.createButton} onPress={handleLogin}>
                         {/* <Text bold size={14} color={argonTheme.COLORS.WHITE}> */}
                           Login
                         {/* </Text> */}
@@ -96,6 +161,7 @@ export default function Login(props) {
           </Block>
         </Block>
       </ImageBackground>
+    </AlertNotificationRoot>
     </Block>
   );
 }

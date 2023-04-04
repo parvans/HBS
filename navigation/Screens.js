@@ -9,11 +9,10 @@ import { Block } from "galio-framework";
 import CustomDrawerContent from "./Menu";
 import Elements from "../screens/Elements";
 // screens
-import Home from "../screens/Home";
 import HBSHome from "../screens/hbs/HBSHome";
 import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
-import Profile from "../screens/Profile";
+import Profile from "../screens/hbs/Profile";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -303,6 +302,13 @@ function AppStack(props) {
       />
       <Drawer.Screen
         name="Add User"
+        component={Register}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="Add Hall"
         component={Register}
         options={{
           headerShown: false,

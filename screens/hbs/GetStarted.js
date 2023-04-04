@@ -13,9 +13,21 @@ const { height, width } = Dimensions.get("screen");
 import argonTheme from "../../constants/Theme";
 import Images from "../../constants/Images";
 import hbslogo from "../../assets/imgs/hbs-white.png"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function GetStarted(props) {
     const{navigation} = props;
+    const userToken= AsyncStorage.getItem('user-token')
+    const handleAuth=()=>{
+      if(userToken._z){
+        navigation.navigate("Home")
+        console.log('====================================');
+        console.log("ddd",userToken._z);
+        console.log('====================================');
+      }else{
+        navigation.navigate("Login")
+      }
+    }
   return (
     <Block flex style={styles.container}>
     <StatusBar hidden />
@@ -56,7 +68,7 @@ export default function GetStarted(props) {
             <Button
               style={styles.button}
               color={argonTheme.COLORS.SECONDARY}
-              onPress={() => navigation.navigate("Login")}
+              onPress={handleAuth}
               textStyle={{ color: argonTheme.COLORS.BLACK }}
             >
               Get Started
