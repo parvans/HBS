@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ImageBackground,
   Image,
@@ -14,16 +14,16 @@ import argonTheme from "../../constants/Theme";
 import Images from "../../constants/Images";
 import hbslogo from "../../assets/imgs/hbs-white.png"
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getToken } from "../../app/auth/Store";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function GetStarted(props) {
     const{navigation} = props;
-    const userToken= AsyncStorage.getItem('user-token')
+    const {userToken}= useContext(AuthContext)
     const handleAuth=()=>{
-      if(userToken._z){
+      if(userToken){
+        console.log(userToken);
         navigation.navigate("Home")
-        console.log('====================================');
-        console.log("ddd",userToken._z);
-        console.log('====================================');
       }else{
         navigation.navigate("Login")
       }

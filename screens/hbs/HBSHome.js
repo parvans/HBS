@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Dimensions, ScrollView } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
 import Card from "../../components/Card";
 import articles from "../../constants/articles";
+import { getToken } from "../../app/auth/Store";
+import { AuthContext } from "../../context/AuthContext";
 const { width } = Dimensions.get("screen");
 
 export default function HBSHome() {
+  const {userInfo}=useContext(AuthContext)
   return (
     <Block flex center style={styles.home}>
       <ScrollView

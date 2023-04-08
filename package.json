@@ -28,6 +28,7 @@
     "expo-asset": "~8.7.0",
     "expo-font": "~11.0.1",
     "expo-modules-core": "~1.0.4",
+    "expo-secure-store": "^12.1.1",
     "expo-splash-screen": "^0.18.1",
     "force": "^0.0.3",
     "galio-framework": "^0.8.0",

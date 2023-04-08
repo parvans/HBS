@@ -5,7 +5,6 @@ import {
   Dimensions,
   StatusBar,
   KeyboardAvoidingView,
-  Alert,
 } from "react-native";
 import { Block, Text } from "galio-framework";
 import { Button, Icon, Input } from "../../../components";
@@ -15,9 +14,14 @@ import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { log } from "react-native-reanimated";
 import Spinner from 'react-native-loading-spinner-overlay';
+import { api } from "../../../api/apiService";
+import { AlertNotificationRoot, ALERT_TYPE, Dialog } from "react-native-alert-notification";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const { width, height } = Dimensions.get("screen");
 
 export default function Register({ navigation }) {
+  const token=AsyncStorage.getItem("user-token")
+  console.log(token);
   const [deparments, setDepartments] = useState([])
   const depts = [
     "B.Sc Data Science", "BCA", "B.Sc Computer Science", "B.Sc Information Technology", "B.Com", "B.Com(CA)",
@@ -38,40 +42,82 @@ export default function Register({ navigation }) {
   }
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState('hbs@123')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const [loading, setLoading] = useState(false);
+console.log('====================================');
+console.log(value);
+console.log('====================================');
 
-
-  const handleRegDept = () => {
-    if(!name &&!email&&!password&&!confirmPassword&&!value){
+  const handleRegDept = async() => {
+    if(!name ||!email||!value){
       Dialog.show({
         type: ALERT_TYPE.DANGER,
         title: 'Error',
         textBody: 'All fields are required',
         button: 'close',
       });
-    }else if(!!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{3}$/.test(email)){
+    }else if(!name){
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error',
+        textBody: 'Name is required',
+        button: 'close',
+      });
+    }else if(!email){
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error',
+        textBody: 'Email is required',
+        button: 'close',
+      });
+    }else if(!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{3}$/.test(email)){
       Dialog.show({
         type: ALERT_TYPE.DANGER,
         title: 'Error',
         textBody: 'Invalid Email',
         button: 'close',
       });
-    }else if(password !== confirmPassword){
-      Dialog.show({
-        type: ALERT_TYPE.DANGER,
-        title: 'Error',
-        textBody: 'Password does not match',
-        button: 'close',
-      });
     }else{
-      navigation.navigate('Register2', { name, email, password, value })
+     try {
+      if(name&&value&&email){
+        setLoading(true)
+        const res = await api.post('auth', {
+          name: name,
+          email: email,
+          department: value,
+          password: password,
+        },
+        )
+        if(res.data.status===201){
+          setLoading(false)
+          Dialog.show({
+            type: ALERT_TYPE.SUCCESS,
+            title: 'Success',
+            textBody: res.data.message,
+            button: 'close',
+          });
+          navigation.navigate('Login')
+        }else{
+          setLoading(false)
+          console.log(res.data);
+          Dialog.show({
+            type: ALERT_TYPE.DANGER,
+            title: 'Error',
+            textBody: res.data.message,
+            button: 'close',
+          });
+        }
+      }
+     } catch (error) {
+      console.log(error)
+     }
     }
   }
   return (
+    <AlertNotificationRoot>
     <Block flex middle>
       <Spinner
           visible={loading}
@@ -162,65 +208,8 @@ export default function Register({ navigation }) {
                       }
                     />
                   </Block>
-                  <Block width={width * 0.8}>
-                    <Input
-                      //type="password"
-                      password
-                      borderless
-                      placeholder="Password"
-                      value={password}
-                      onChangeText={(text) => setPassword(text)}
-                      iconContent={
-                        <Icon
-                          size={16}
-                          color={argonTheme.COLORS.ICON}
-                          name="padlock-unlocked"
-                          family="ArgonExtra"
-                          style={styles.inputIcons}
-                        />
-                      }
-                    />
-                  </Block>
-                  <Block width={width * 0.8}>
-                    <Input
-                      //type="password"
-                      password
-                      borderless
-                      placeholder="Confirm Password"
-                      value={confirmPassword}
-                      onChangeText={(text) => setConfirmPassword(text)}
-                      iconContent={
-                        <Icon
-                          size={16}
-                          color={argonTheme.COLORS.ICON}
-                          name="padlock-unlocked"
-                          family="ArgonExtra"
-                          style={styles.inputIcons}
-                        />
-                      }
-                    />
-                  </Block>
                   <Block middle>
-                    <Button color="primary" style={styles.createButton} onPress={() => {
-                      Alert.alert(
-                        "Registration Successfull",
-                        "You have successfully registered",
-                        [
-                          {
-                            text: "Cancel",
-                            onPress: () => navigation.navigate("Login"),
-                            style: "cancel"
-                          },
-                          {
-                            text: "OK",
-                            onPress: () => navigation.navigate("Home"),
-                            style: "cancel"
-                          }
-                        ],
-                        { cancelable: false }
-                      );
-
-                    }}>
+                    <Button color="primary" style={styles.createButton} onPress={handleRegDept}>
                       <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                         Register
                       </Text>
@@ -233,6 +222,7 @@ export default function Register({ navigation }) {
         </Block>
       </ImageBackground>
     </Block>
+    </AlertNotificationRoot>
   );
 }
 
@@ -242,7 +232,7 @@ const styles = StyleSheet.create({
   },
   registerContainer: {
     width: width * 0.9,
-    height: height * 0.575,
+    height: height * 0.5,
     backgroundColor: "#F4F5F7",
     borderRadius: 20,
     shadowColor: argonTheme.COLORS.BLACK,

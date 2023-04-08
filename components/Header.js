@@ -8,7 +8,7 @@ import Input from './Input';
 import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {  DrawerActions } from '@react-navigation/native';
+import {  DrawerActions, useNavigation} from '@react-navigation/native';
 
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
@@ -163,7 +163,7 @@ class Header extends React.Component {
     if (search || tabs || options) {
       return (
         <Block center>
-          {/* {search ? this.renderSearch() : null} */}
+          {search ? this.renderSearch() : null}
           {options ? this.renderOptions() : null}
           {tabs ? this.renderTabs() : null}
         </Block>
