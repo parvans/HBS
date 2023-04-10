@@ -50,14 +50,17 @@ export default function Login(props) {
           email: email,
           password: password
         }).then((response) => {
-          // console.log(response.data)
-          if (response.data.token) {
-            login(response.data)
-            console.log(userToken);
+          console.log(response.status)
+          if (response.status === 200) {
+            login(response)
+            // console.log('====================================');
+            // console.log(userToken);
+            // console.log('====================================');
             if (userToken) {
               navigation.navigate('App')
             }
           } else {
+            console.log(response.data.message);
             Dialog.show({
               type: ALERT_TYPE.DANGER,
               title: 'Error',
@@ -74,8 +77,8 @@ export default function Login(props) {
 
 
   return (
+    <AlertNotificationRoot>
     <Block flex middle >
-      <AlertNotificationRoot>
         <StatusBar hidden />
         <ImageBackground
           source={Images.RegisterBackground}
@@ -159,8 +162,8 @@ export default function Login(props) {
             </Block>
           </Block>
         </ImageBackground>
-      </AlertNotificationRoot>
     </Block>
+      </AlertNotificationRoot>
   );
 }
 

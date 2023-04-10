@@ -8,10 +8,10 @@ export const AuthProvider=({children})=>{
     const [userInfo, setUserInfo]=useState()
     const login=(data)=>{
         setIsLoading(true)
-        setUserInfo(data)
-        setUserToken(data.token)
+        setUserInfo(data.data)
+        setUserToken(data.data.token)
         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo))
-        AsyncStorage.setItem('userToken', data.token)
+        AsyncStorage.setItem('userToken', data.data.token)
         setIsLoading(false)
     }
     const logout=()=>{
@@ -41,7 +41,7 @@ export const AuthProvider=({children})=>{
         isLoggedIn()
     },[])
     return (
-        <AuthContext.Provider value={{login, logout, userToken, isLoading}}>
+        <AuthContext.Provider value={{login, logout,userInfo, userToken, isLoading}}>
             {children}
         </AuthContext.Provider>
     )

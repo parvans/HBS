@@ -22,7 +22,7 @@ export default function GetStarted(props) {
     const {userToken}= useContext(AuthContext)
     const handleAuth=()=>{
       if(userToken){
-        console.log(userToken);
+        // console.log(userToken);
         navigation.navigate("Home")
       }else{
         navigation.navigate("Login")

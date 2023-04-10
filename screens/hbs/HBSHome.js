@@ -9,7 +9,11 @@ import { AuthContext } from "../../context/AuthContext";
 const { width } = Dimensions.get("screen");
 
 export default function HBSHome() {
-  const {userInfo}=useContext(AuthContext)
+  const {userInfo,userToken}=useContext(AuthContext)
+  // console.log('====================================');
+  // console.log(userInfo);
+  // console.log(userToken);
+  // console.log('====================================');
   return (
     <Block flex center style={styles.home}>
       <ScrollView

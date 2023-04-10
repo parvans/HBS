@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -15,13 +15,14 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { log } from "react-native-reanimated";
 import Spinner from 'react-native-loading-spinner-overlay';
 import { api } from "../../../api/apiService";
-import { AlertNotificationRoot, ALERT_TYPE, Dialog } from "react-native-alert-notification";
+import { AlertNotificationRoot, ALERT_TYPE, Dialog, Toast } from "react-native-alert-notification";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../../../context/AuthContext";
 const { width, height } = Dimensions.get("screen");
 
-export default function Register({ navigation }) {
-  const token=AsyncStorage.getItem("user-token")
-  console.log(token);
+export default function Register(props) {
+  const { navigation } = props;
+  const {userToken}=useContext(AuthContext)
   const [deparments, setDepartments] = useState([])
   const depts = [
     "B.Sc Data Science", "BCA", "B.Sc Computer Science", "B.Sc Information Technology", "B.Com", "B.Com(CA)",
@@ -47,9 +48,9 @@ export default function Register({ navigation }) {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const [loading, setLoading] = useState(false);
-console.log('====================================');
-console.log(value);
-console.log('====================================');
+// console.log('====================================');
+// console.log(value);
+// console.log('====================================');
 
   const handleRegDept = async() => {
     if(!name ||!email||!value){
@@ -90,16 +91,23 @@ console.log('====================================');
           department: value,
           password: password,
         },
+        {
+          headers: {
+            'token': userToken,
+          },
+        }
         )
-        if(res.data.status===201){
+        if(res.status===201){
           setLoading(false)
           Dialog.show({
             type: ALERT_TYPE.SUCCESS,
             title: 'Success',
             textBody: res.data.message,
-            button: 'close',
+            button: 'Ok',
+            onPressButton: () => {
+              navigation.navigate('Home')
+            },
           });
-          navigation.navigate('Login')
         }else{
           setLoading(false)
           console.log(res.data);
@@ -108,6 +116,7 @@ console.log('====================================');
             title: 'Error',
             textBody: res.data.message,
             button: 'close',
+
           });
         }
       }
