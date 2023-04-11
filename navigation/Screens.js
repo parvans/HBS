@@ -20,6 +20,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import GetStarted from "../screens/hbs/GetStarted";
 import Login from "../screens/hbs/auth/Login.js";
 import Register from "../screens/hbs/auth/Register.js";
+import HallRegister from "../screens/hbs/HallRegister";
 
 const { width } = Dimensions.get("screen");
 
@@ -309,7 +310,7 @@ function AppStack(props) {
       />
       <Drawer.Screen
         name="Add Hall"
-        component={Register}
+        component={HallRegister}
         options={{
           headerShown: false,
         }}

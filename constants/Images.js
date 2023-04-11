@@ -12,7 +12,7 @@ const androidLogo = require("../assets/imgs/android.png");
 // internet imgs
 
 // const ProfilePicture = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?fit=crop&w=1650&q=80';
-
+const Hall='https://dds-cdn.datascape.cloud/public/aucklandcouncil/0bca64df-a89c-4f7a-8c51-47e8f4396bc0'
 const Viewed = [
   'https://images.unsplash.com/photo-1501601983405-7c7cabaa1581?fit=crop&w=240&q=80',
   'https://images.unsplash.com/photo-1543747579-795b9c2c3ada?fit=crop&w=240&q=80',
@@ -38,5 +38,6 @@ export default {
   Pro,
   ArgonLogo,
   iOSLogo,
-  androidLogo
+  androidLogo,
+  Hall
 };
