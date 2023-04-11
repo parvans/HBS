@@ -1,14 +1,98 @@
 import { Block, Text } from 'galio-framework';
-import React from 'react';
-import { Dimensions, ImageBackground, StatusBar, StyleSheet } from 'react-native';
-import { AlertNotificationRoot } from 'react-native-alert-notification';
+import React, { useContext, useEffect, useState } from 'react';
+import { Alert, Dimensions, ImageBackground, StatusBar, StyleSheet } from 'react-native';
+import { ALERT_TYPE, AlertNotificationRoot, Dialog,Toast } from 'react-native-alert-notification';
 import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 import { Button, Icon, Input } from '../../components';
 import { Images, argonTheme } from '../../constants';
+import { api } from '../../api/apiService';
+import { AuthContext } from '../../context/AuthContext';
 const { width, height } = Dimensions.get("screen");
 
 function HallRegister(props) {
-    const { navigation } = props;
+  const {userToken}=useContext(AuthContext)
+  const { navigation } = props;
+  const [name, setName] = useState('');
+  const handleNewHall = async() => {
+    if(!name){
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error',
+        textBody: 'Please enter hall name',
+        button: 'close',
+      });
+    }else if(name.length < 3){
+      Dialog.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error',
+        textBody: 'Hall name must be at least 3 characters',
+        button: 'close',
+      });
+  }else{
+    try {
+      const res=await api.post('hall', 
+      {
+        name:name,
+        url:Images.Hall
+      },{
+        headers: {
+          "token": userToken
+        }})
+        console.log(res.data.message);
+      if(res.status === 201){
+        // Dialog.show({
+        //   type: ALERT_TYPE.SUCCESS,
+        //   title: 'Success',
+        //   textBody: res.data.message,
+        //   button: 'OK',
+        //   onPressButton: () => {
+        //     navigation.navigate('Home')
+        //   }
+        // });
+
+        Alert.alert(
+          "Success",
+          res.data.message,
+          [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate('Home')
+            }
+          ],
+          { cancelable: false }
+
+        )
+      }else{
+        // Dialog.show({
+        //   type: ALERT_TYPE.DANGER,
+        //   title: 'Error',
+        //   textBody: res.data.message,
+        //   button: 'close',
+        // });
+
+        Alert.alert(
+          "Error",
+          res.data.message,
+          [
+            {
+              text: "Cancel",
+            },
+            {
+              text: "OK",
+              onPress: () => navigation.navigate('Home')
+            }
+          ],
+          { cancelable: false }
+        )
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+        
+  }
+
+}
   return (
     <AlertNotificationRoot>
     <Block flex middle >
@@ -35,6 +119,8 @@ function HallRegister(props) {
                         <Input
                         borderless
                         placeholder="Hall Name"
+                        value={name}
+                        onChangeText={(text) => setName(text)}
                         iconContent={
                           <Icon
                             size={16}
@@ -83,10 +169,10 @@ function HallRegister(props) {
                       />
                     </Block> */}
                     <Block middle>
-                      <Button color="primary" style={styles.createButton} >
-                        {/* <Text bold size={14} color={argonTheme.COLORS.WHITE}> */}
+                      <Button color="primary" style={styles.createButton} onPress={handleNewHall}>
+                        <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                         Add
-                        {/* </Text> */}
+                        </Text>
                       </Button>
                     </Block>
                   </KeyboardAvoidingView>
@@ -104,7 +190,7 @@ function HallRegister(props) {
 const styles = StyleSheet.create({
     registerContainer: {
         width: width * 0.9,
-        height: height * 0.37,
+        height: height * 0.325,
         backgroundColor: "#F4F5F7",
         borderRadius: 20,
         shadowColor: argonTheme.COLORS.BLACK,

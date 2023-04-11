@@ -13,7 +13,6 @@ import { argonTheme } from "../../../constants";
 import Images from "../../../constants/Images";
 import { api } from "../../../api/apiService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getToken, storeToken } from "../../../app/auth/Store";
 import { AuthContext } from "../../../context/AuthContext";
 const { width, height } = Dimensions.get("screen");
 

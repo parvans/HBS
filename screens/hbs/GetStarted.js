@@ -14,7 +14,6 @@ import argonTheme from "../../constants/Theme";
 import Images from "../../constants/Images";
 import hbslogo from "../../assets/imgs/hbs-white.png"
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getToken } from "../../app/auth/Store";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function GetStarted(props) {
