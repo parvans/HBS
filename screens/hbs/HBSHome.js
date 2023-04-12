@@ -47,9 +47,6 @@ export default function HBSHome() {
           
         }
       >
-        {/* {articles.map((item, index) => (
-          <Card key={index} item={item} horizontal />
-        ))} */}
         {
           loading ? (
           <Spinner

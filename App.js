@@ -14,6 +14,9 @@ enableScreens();
 import Screens from "./navigation/Screens";
 import { Images, articles, argonTheme } from "./constants";
 import { AuthProvider } from './context/AuthContext';
+import { CancelDateProvider } from './context/CancelDateContext';
+import { HallProvider } from './context/HallContext';
+import { ReasonProvider } from './context/ReasonContext';
 
 // cache app images
 const assetImages = [
@@ -70,9 +73,10 @@ export default props => {
   } else if(fontsLoaded) {
     return (
       <AuthProvider>
-
+        <ReasonProvider>
+        <HallProvider>
+        <CancelDateProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-
       <NavigationContainer>
         <GalioProvider theme={argonTheme}>
           <Block flex>
@@ -81,6 +85,9 @@ export default props => {
         </GalioProvider>
       </NavigationContainer>
       </GestureHandlerRootView>
+        </CancelDateProvider>
+        </HallProvider>
+        </ReasonProvider>
       </AuthProvider>
     );
   } else {
