@@ -30,7 +30,7 @@ class ArInput extends React.Component {
           <Icon
             size={14}
             color={argonTheme.COLORS.ICON}
-            name="link"
+            // name="link"
             family="AntDesign"
           />
         }
