@@ -18,14 +18,14 @@ import {
 } from "react-native-alert-notification";
 import { HallContext } from "../../context/HallContext";
 import { ReasonContext } from "../../context/ReasonContext";
-import Book from "./Book";
 import { api } from "../../api/apiService";
 import { AuthContext } from "../../context/AuthContext";
 import jwtDecode from "jwt-decode";
 const { width, height } = Dimensions.get("screen");
 
 function Hall(props) {
-  const { userToken } = useContext(AuthContext);
+  const { userToken, userInfo} = useContext(AuthContext);
+  // console.log(userInfo.isAdmin);
   const decoded = jwtDecode(userToken);
   const { item } = props.route.params;
   const { navigation } = props;
@@ -42,7 +42,7 @@ function Hall(props) {
   }
   function onDateSelected(event, value) {
     setDate(value);
-    console.log(value);
+    //console.log(value);
     setDatePicker(false);
   }
   const toggleModal = () => {
@@ -62,11 +62,7 @@ function Hall(props) {
           type: ALERT_TYPE.SUCCESS,
           title: "Success",
           textBody: res.data.message,
-          button: "Ok",
-          onPressButton: () => {
-            setModalVisible(false);
-            navigation.navigate("Home");
-          }
+          button: "close",
         });
       } else {
         Dialog.show({
@@ -145,10 +141,6 @@ function Hall(props) {
             title: "Success",
             textBody: res.data.message,
             button: "Ok",
-            onPressButton: () => {
-              setModalVisible(false);
-              navigation.navigate("Home");
-            }
           });
         } else {
           Dialog.show({
@@ -156,10 +148,6 @@ function Hall(props) {
             title: "Error",
             textBody: res.data.message,
             button: "Ok",
-            onPressButton: () => {
-              setModalVisible(false);
-              navigation.navigate("Home");
-            }
           });
         }
       } catch (err) {
@@ -290,7 +278,8 @@ function Hall(props) {
                 Book
               </Text>
             </Button>
-            <Button
+            {userInfo.isAdmin&&<>
+              <Button
               color="secondary"
               style={styles.updateButton}
               onPress={toggleUpdateModal}
@@ -308,6 +297,8 @@ function Hall(props) {
                 Delete
               </Text>
             </Button>
+              </>
+            }
           </Block>
         </Block>
       </Block>

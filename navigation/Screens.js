@@ -22,6 +22,8 @@ import Login from "../screens/hbs/auth/Login.js";
 import Register from "../screens/hbs/auth/Register.js";
 import HallRegister from "../screens/hbs/HallRegister";
 import Hall from "../screens/hbs/Hall";
+import AllBookings from "../screens/hbs/AllBookings";
+import Bookings from "../screens/hbs/Bookings";
 
 const { width } = Dimensions.get("screen");
 
@@ -316,6 +318,20 @@ function AppStack(props) {
       <Drawer.Screen
         name="Add Hall"
         component={HallRegister}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="All Bookings"
+        component={AllBookings}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="Bookings"
+        component={Bookings}
         options={{
           headerShown: false,
         }}

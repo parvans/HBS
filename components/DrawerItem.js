@@ -61,7 +61,7 @@ class DrawerItem extends React.Component {
             name="switches"
             family="ArgonExtra"
             size={14}
-            color={focused ? "white" : argonTheme.COLORS.INFO}
+            color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
       case "Add Hall":
@@ -70,7 +70,25 @@ class DrawerItem extends React.Component {
             name="shop"
             family="ArgonExtra"
             size={14}
-            color={focused ? "white" : argonTheme.COLORS.INFO}
+            color={focused ? "white" : argonTheme.COLORS.SUCCESS}
+          />
+        );
+      case "All Bookings":
+        return (
+          <Icon
+            name="basket"
+            family="ArgonExtra"
+            size={14}
+            color={focused ? "white" : argonTheme.COLORS.HEADER}
+          />
+        );
+      case "Bookings":
+        return (
+          <Icon
+            name="basket"
+            family="ArgonExtra"
+            size={14}
+            color={focused ? "white" : argonTheme.COLORS.HEADER}
           />
         );
       case "Getting Started":

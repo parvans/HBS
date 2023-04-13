@@ -3,8 +3,9 @@ import { Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 
 import { Button, DrawerItem as DrawerCustomItem } from "../components";
 import Images from "../constants/Images";
-import React from "react";
+import React, { useContext } from "react";
 import hbsLogo from "../assets/imgs/hbs-black.png";
+import { AuthContext } from "../context/AuthContext";
 function CustomDrawerContent({
   drawerPosition,
   navigation,
@@ -13,9 +14,14 @@ function CustomDrawerContent({
   state,
   ...rest
 }) {
-  const screens = ["Home", "Profile", "Add User","Add Hall"
   // , "Elements", "Articles"
-];
+  const {userInfo}=useContext(AuthContext)
+  var screens=[]
+  if(userInfo.isAdmin){
+    screens = ["Home", "Profile", "Add User","Add Hall","All Bookings","Bookings"];
+  }else{
+    screens = ["Home", "Profile","Bookings"];
+  }
   return (
     <Block
       style={styles.container}
