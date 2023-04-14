@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import useFetch from "../../hooks/useFetch";
 import Spinner from 'react-native-loading-spinner-overlay';
 import { api } from "../../api/apiService";
+import { AlertNotificationRoot } from "react-native-alert-notification";
 const { width } = Dimensions.get("screen");
 
 export default function HBSHome() {
@@ -38,6 +39,7 @@ export default function HBSHome() {
     getHalls()
   }, [data,loading])
   return (
+    <AlertNotificationRoot>
     <Block flex center style={styles.home}>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -60,6 +62,7 @@ export default function HBSHome() {
         }
       </ScrollView>
     </Block>
+    </AlertNotificationRoot>
   );
 }
 

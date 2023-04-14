@@ -9,15 +9,29 @@ import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {  DrawerActions, useNavigation} from '@react-navigation/native';
+import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
+const handleLogout = (navigation) => {
+  Dialog.show({
+    type: ALERT_TYPE.WARNING,
+    title: "Are you sure?",
+    textBody: "You are about to logout",
+    button: "LOGOUT",
+    onPressButton: () => {
+      AsyncStorage.clear()
+      navigation.navigate('Login')
+    }
+  });
 
+}
 const BellButton = ({isWhite, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]} 
   onPress={() => {
-    AsyncStorage.clear()
-    navigation.navigate('Login')
+    // AsyncStorage.clear()
+    // navigation.navigate('Login')
+    handleLogout(navigation)
   }}>
     <Icon
       family="ArgonExtra"
