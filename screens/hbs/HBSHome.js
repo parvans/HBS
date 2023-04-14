@@ -56,7 +56,10 @@ export default function HBSHome() {
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
-          ) : data.map((item,index)=>{
+          ) :data.length===0 ? (
+            <Text>No Halls Available</Text>
+          )
+          : data.map((item,index)=>{
             return <Card key={index} item={item} horizontal />
           })
         }

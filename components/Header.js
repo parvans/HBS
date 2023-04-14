@@ -29,9 +29,9 @@ const handleLogout = (navigation) => {
 const BellButton = ({isWhite, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]} 
   onPress={() => {
-    // AsyncStorage.clear()
-    // navigation.navigate('Login')
-    handleLogout(navigation)
+    AsyncStorage.clear()
+    navigation.navigate('Login')
+    // handleLogout(navigation)
   }}>
     <Icon
       family="ArgonExtra"

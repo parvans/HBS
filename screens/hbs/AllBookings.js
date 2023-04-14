@@ -5,10 +5,12 @@ import { AuthContext } from '../../context/AuthContext';
 import { api } from '../../api/apiService';
 import Spinner from 'react-native-loading-spinner-overlay';
 import BookCard from '../../components/BookCard';
+import { ALERT_TYPE, AlertNotificationRoot, Dialog } from 'react-native-alert-notification';
 const { width, height } = Dimensions.get("screen");
 
 function AllBookings(props) {
     const { userInfo, userToken } = useContext(AuthContext)
+    const { navigation } = props
     const [refreshing, setRefreshing] = useState(false);
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState()
@@ -32,6 +34,7 @@ function AllBookings(props) {
             console.log(error);
         }
     }
+
     useEffect(() => {
         getAllBookings()
     }, [data, loading])
@@ -51,15 +54,23 @@ function AllBookings(props) {
                             textContent={'Loading...'}
                             textStyle={styles.spinnerTextStyle}
                         />
-                    ) : data.map((item, index) => {
+                    ) : data.length === 0 ? (
+                        <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
+                        <Text style={{fontSize:20}}>No Bookings</Text>
+                    </View>
+                    )
+                    : data.map((item, index) => {
                         let dt = new Date(item.date)
                         return <BookCard
+                            key={index}
                             hallName={item.hallId.name}
                             hallImage={item.hallId.url}
                             date={dt.toLocaleDateString()}
                             reason={item.reason}
                             user={item.userId.name}
                             department={item.userId.department}
+                            dataid={item._id}
+                            navigation={navigation}
                         />
 
                     })

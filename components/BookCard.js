@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 
-const BookCard = ({ hallName, hallImage, date, reason, user, department }) => {
+const BookCard = ({dataid,hallName, hallImage, date, reason, user, department, navigation }) => {
   return (
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('BookingDetails', {hallName, hallImage, date, reason, user, department, dataid})}>     
     <View style={styles.card}>
       <Image source={{uri:hallImage}} style={styles.image} />
 
@@ -21,6 +22,7 @@ const BookCard = ({ hallName, hallImage, date, reason, user, department }) => {
       {department&&<><Text style={styles.label}>Department:</Text>
       <Text style={styles.value}>{department}</Text></>}
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -51,6 +53,16 @@ const styles = StyleSheet.create({
   },
   value: {
     marginBottom: 16,
+  },
+  deleteButton: {
+    backgroundColor: '#f44336',
+    padding: 5,
+    borderRadius: 5,
+  },
+  deleteText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

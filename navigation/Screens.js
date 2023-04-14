@@ -24,6 +24,7 @@ import HallRegister from "../screens/hbs/HallRegister";
 import Hall from "../screens/hbs/Hall";
 import AllBookings from "../screens/hbs/AllBookings";
 import Bookings from "../screens/hbs/Bookings";
+import BookingDetails from "../screens/hbs/BookingDetails";
 
 const { width } = Dimensions.get("screen");
 
@@ -257,6 +258,10 @@ export default function OnboardingStack(props) {
       <Stack.Screen
         name="Hall"
         component={Hall}
+      />
+      <Stack.Screen
+        name="BookingDetails"
+        component={BookingDetails}
       />
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
