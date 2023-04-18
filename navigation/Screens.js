@@ -25,6 +25,8 @@ import Hall from "../screens/hbs/Hall";
 import AllBookings from "../screens/hbs/AllBookings";
 import Bookings from "../screens/hbs/Bookings";
 import BookingDetails from "../screens/hbs/BookingDetails";
+import AllUsers from "../screens/hbs/AllUsers";
+import User from "../screens/hbs/User";
 
 const { width } = Dimensions.get("screen");
 
@@ -263,6 +265,10 @@ export default function OnboardingStack(props) {
         name="BookingDetails"
         component={BookingDetails}
       />
+      <Stack.Screen
+        name="User"
+        component={User}
+      />
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
   );
@@ -310,35 +316,42 @@ function AppStack(props) {
         name="Profile"
         component={ProfileStack}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Drawer.Screen
         name="Add User"
         component={Register}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Drawer.Screen
         name="Add Hall"
         component={HallRegister}
         options={{
-          headerShown: false,
+          headerShown: true,
+        }}
+      />
+      <Drawer.Screen
+        name="All Users"
+        component={AllUsers}
+        options={{
+          headerShown: true,
         }}
       />
       <Drawer.Screen
         name="All Bookings"
         component={AllBookings}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Drawer.Screen
         name="Bookings"
         component={Bookings}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Drawer.Screen

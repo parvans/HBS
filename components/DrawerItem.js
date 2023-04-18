@@ -73,6 +73,15 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.SUCCESS}
           />
         );
+      case "All Users":
+        return (
+          <Icon
+            name="g-check"
+            family="ArgonExtra"
+            size={14}
+            color={focused ? "white" : argonTheme.COLORS.SUCCESS}
+          />
+        );
       case "All Bookings":
         return (
           <Icon

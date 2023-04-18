@@ -18,7 +18,7 @@ function CustomDrawerContent({
   const {userInfo}=useContext(AuthContext)
   var screens=[]
   if(userInfo.isAdmin){
-    screens = ["Home", "Profile", "Add User","Add Hall","All Bookings","Bookings"];
+    screens = ["Home", "Profile", "Add User","Add Hall","All Users","All Bookings","Bookings"];
   }else{
     screens = ["Home", "Profile","Bookings"];
   }
