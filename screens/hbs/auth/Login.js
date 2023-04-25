@@ -53,7 +53,7 @@ export default function Login(props) {
           if (response.status === 200) {
             login(response)
             // console.log('====================================');
-            // console.log(userToken);
+            //  console.log(userToken);
             // console.log('====================================');
             if (userToken) {
               navigation.navigate('App')

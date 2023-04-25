@@ -28,6 +28,7 @@ export default function HBSHome() {
     try {
       const res=await api.get(`hall`)
       if(res.status===200){
+        // console.log(res.data);
         setData(res.data)
         setLoading(false)
       }
@@ -56,7 +57,8 @@ export default function HBSHome() {
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
-          ) :data.length===0 ? (
+          ) :
+          data.length===0 ? (
             <Text>No Halls Available</Text>
           )
           : data.map((item,index)=>{
