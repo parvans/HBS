@@ -110,7 +110,7 @@ export default function Register(props) {
           });
         }else{
           setLoading(false)
-          console.log(res.data);
+          // console.log(res.data);
           Dialog.show({
             type: ALERT_TYPE.DANGER,
             title: 'Error',
