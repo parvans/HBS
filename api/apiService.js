@@ -1,6 +1,6 @@
 import { create } from "apisauce";
 export const api=create({
-    baseURL:"http://192.168.223.111:4001/api/",
+    baseURL:"http://192.168.1.38:4001/api/",
     headers:{
         "Content-Type":"application/json",
     }
