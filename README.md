@@ -37,5 +37,5 @@ Install my-project with npm
     
 ## Screenshots
 
-![App Screenshot]("./screenshots/1.png")
+![App Screenshot]("https://github.com/parvans/HBS/blob/main/screenshots/1.jpg")
 
