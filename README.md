@@ -35,7 +35,4 @@ Install my-project with npm
   cd my-project
 ```
     
-## Screenshots
-
-![]("https://github.com/parvans/HBS/blob/main/screenshots/1.jpg")
 
